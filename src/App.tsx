@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { InputField } from './components/InputField/InputField';
 import { TodoList } from './components/TodoList/TodoList';
@@ -8,7 +8,15 @@ import { TodoItemInterface, ButtonClassInterface, SortTypesInterface } from './t
 import './App.scss';
 
 function App() {
-  const [todoList, setTodoList] = useState<TodoItemInterface[]>(() => []);
+  let todoData: TodoItemInterface[];
+
+  if (localStorage.getItem('data') !== null) {
+    todoData = JSON.parse(localStorage.getItem('data') as string);
+  } else {
+    todoData = []
+  }
+
+  const [todoList, setTodoList] = useState<TodoItemInterface[]>(() => todoData);
 
   const [buttonClass, setButtonClass] = useState<ButtonClassInterface>(
     {
@@ -17,6 +25,12 @@ function App() {
       completed: false
     }
   );
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(todoList))
+  }, [todoList])
+
+
 
   function sortTodo(type: string) {
     const sortTypes: SortTypesInterface = {
