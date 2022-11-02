@@ -4,8 +4,6 @@
   align-items: center;
 
   padding: 4px 5px;
-  margin-top: 10px;
-
 
   &__text {
     font-size: 15px;
@@ -28,6 +26,12 @@
 
     &:hover {
       color: #787676;
+      transition-duration: 0.1s;
+    }
+
+    &.button-active {
+      color: #787676;
+      font-weight: 600;
       transition-duration: 0.1s;
     }
   }

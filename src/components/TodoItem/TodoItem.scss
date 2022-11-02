@@ -1,0 +1,64 @@
+.todo-item {
+  border-bottom: 1px solid #e8e7e8;
+  list-style: none;
+  padding: 4px;
+
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+
+  &__fake-checkbox {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    z-index: 1;
+
+    height: 17px;
+    width: 17px;
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__fake-checkbox-mark {
+    height: 17px;
+    width: 17px;
+
+    position: absolute;
+    z-index: 0;
+    top: -2px;
+    left: 2px;
+
+    color: #c4c4c4;
+    cursor: default
+  }
+
+  &__checkbox {
+    position: relative;
+    left: -9999px;
+    width: 15px;
+    height: 15px;
+
+    cursor: pointer;
+
+    &:checked+span {
+      color: #c4c4c4;
+      text-decoration: line-through;
+      transition-duration: 0.4s;
+    }
+  }
+
+  &__text {
+    max-width: 100%;
+    flex-grow: 1;
+  }
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    color: #ff6347;
+    cursor: pointer;
+  }
+}
