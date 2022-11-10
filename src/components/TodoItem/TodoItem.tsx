@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { TodoItemProps } from '../../types'
 
 import './TodoItem.scss'
@@ -9,9 +9,10 @@ const TodoItem = ({
   todoData,
   buttonClass }: TodoItemProps) => {
 
-  const refCheckbox = useRef<HTMLInputElement>(null);
 
+  const refCheckbox = useRef<HTMLInputElement>(null);
   const { text, todoId, complited, visability } = todoData;
+  const [inputValue, setInputValue] = useState(text);
 
   const toggleComplited = (id: string) => {
     setTodoList(prev => {
@@ -28,6 +29,25 @@ const TodoItem = ({
   const deleteTodo = () => {
     setTodoList(prev => prev.filter(todo => todo.todoId !== todoId))
   };
+
+  const inputBlurHandler = (inputText: string, id: string) => {
+    const newTodoText = inputText.trim();
+
+    if (newTodoText.length === 0) {
+      setTodoList(prev => prev.filter(todo => todo.todoId !== id))
+      return
+    }
+
+    setInputValue(newTodoText)
+
+    setTodoList(prev => prev.map(todo => {
+      if (todo.todoId === id) {
+        todo.text = newTodoText
+      }
+      return todo
+    }))
+  }
+
 
   const checkboxHandler = (id: string): void => {
     toggleComplited(id)
@@ -69,7 +89,11 @@ const TodoItem = ({
           ref={refCheckbox}
         />
 
-        <span className='todo-item__text'>{text}</span>
+        <input className='todo-item__text'
+          value={inputValue}
+          onBlur={e => inputBlurHandler(e.target.value, todoId)}
+          onChange={e => setInputValue(e.target.value)}
+        />
 
         <button
           className='todo-item__button'

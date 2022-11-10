@@ -30,8 +30,6 @@ function App() {
     localStorage.setItem('data', JSON.stringify(todoList))
   }, [todoList])
 
-
-
   function sortTodo(type: string) {
     const sortTypes: SortTypesInterface = {
       all: () => {
