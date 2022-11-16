@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import { InputField } from './components/InputField/InputField';
-import { TodoList } from './components/TodoList/TodoList';
-import { Footer } from './components/Footer/Footer';
+import { InputField } from '../InputField/InputField';
+import { TodoList } from '../TodoList/TodoList';
+import { Footer } from '../Footer/Footer';
 
-import { TodoItemInterface, ButtonClassInterface, SortTypesInterface } from './types';
+import { TodoItemInterface, ButtonClassInterface, SortTypesInterface } from '../../types';
 import './App.scss';
 
 function App() {
